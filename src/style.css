@@ -1,0 +1,140 @@
+/* Layout ─────────────────────────────────────────────── */
+
+:root {
+  --margin: 1.125em;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-width: 400px;
+  font-size: 0.75em;
+}
+
+#app {
+  flex-grow: 1;
+}
+
+
+/* Layout - #app ──────────────────── */
+
+#app {
+  display: flex;
+  flex-direction: column;
+  padding: var(--margin);
+}
+
+.toolbar {
+  min-height: 1em;
+  flex-grow: 0;
+  margin-bottom: var(--margin);
+}
+
+.content {
+  flex-grow: 1;
+
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  margin: 0;
+}
+
+.content>.item {
+  flex-grow: 1;
+}
+
+.content>.item:first-child {
+  margin-bottom: var(--margin);
+}
+
+textarea {
+  resize: none;
+}
+
+.form-control {
+  /* Overrides Bootstrap default behaviour */
+  width: 100%;
+}
+
+
+/* Layout - Toolbar ───────────────── */
+
+.toolbar {
+  display: flex;
+}
+
+.toolbar>.item {
+  margin-right: var(--margin);
+  flex-shrink: 0;
+}
+
+.toolbar>.item:last-child {
+  margin-right: 0;
+}
+
+.toolbar>button>.icon {
+  vertical-align: -0.25em;
+  margin-right: 0.25em;
+}
+
+.toolbar>button>.img {
+  height: 1.5em;
+}
+
+.toolbar-item,.toolbar-group>btn {
+  --bs-btn-padding-y: 0.25rem;
+  --bs-btn-padding-x: 0.5rem;
+  --bs-btn-font-size: 0.75rem;
+  --bs-btn-border-radius: 0.25rem;
+}
+
+.dropdown-item {
+  vertical-align: 0.2em;
+}
+
+/* Colors ─────────────────────────────────────────────── */
+
+:root {
+  --light-background: #F0F0F0;
+  --dark-background: #16161A;
+}
+
+
+/* Light Scheme ───────────────────── */
+
+.light {
+  background-color: var(--light-background);
+}
+
+body {
+  background-color: var(--light-background);
+}
+
+
+/* Dark Scheme ────────────────────── */
+
+.dark {
+  background-color: var(--dark-background);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  #nope>body {
+    background-color: var(--dark-background);
+  }
+}
+
+
+/* Text ───────────────────────────────────────────────── */
+
+.code {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.9em;
+  tab-size: 4;
+  -moz-tab-size: 4
+}
