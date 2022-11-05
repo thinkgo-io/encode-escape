@@ -1,15 +1,19 @@
+use shared::error::Error;
 use shared::strings::to_utf8;
-use shared::ResultsIn;
+use shared::Result;
+use base64::DecodeError;
 
-pub fn decode(value: &str) -> ResultsIn<String> {
-    match base64::decode(value) {
-        Ok(decoded) => to_utf8(&decoded),
-        Err(error) => Err(Box::new(error)),
-    }
+pub fn decode(value: &str) -> Result<String> {
+    let decoded = base64::decode(value).map_err(to_invalid_value)?;
+    Ok(to_utf8(&decoded)?)
 }
 
 pub fn encode(value: &str) -> String {
     base64::encode(value)
+}
+
+fn to_invalid_value(error: DecodeError) -> Error {
+    Error::invalid_value(&("Decode Error: ".to_string() + error.to_string().as_str()))
 }
 
 #[cfg(test)]

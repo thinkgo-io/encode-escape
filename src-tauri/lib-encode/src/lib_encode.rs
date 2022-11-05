@@ -2,43 +2,47 @@ pub mod base64;
 pub mod html;
 pub mod url;
 
-use shared::ResultsIn;
-use shared::SimpleError;
+use shared::error::Error;
+use shared::Result;
 
-pub fn encode(encoding: &str, variant: &str, input: &str) -> ResultsIn<String> {
+pub fn encode(encoding: &str, operation: &str, input: &str) -> Result<String> {
     match encoding {
-        "base64" => encode_base_64(variant, input),
-        "html" => encode_html(variant, input),
-        "url" => encode_url(variant, input),
-        "smart-url" => encode_url(variant, input),
-        _ => to_error(&("[Uknown encoding '".to_string() + encoding + "']")),
+        "base64" => encode_base_64(operation, input),
+        "html" => encode_html(operation, input),
+        "url" => encode_url(operation, input),
+        "smart-url" => encode_url(operation, input),
+        _ => to_invalid_value(&("[Uknown encoding '".to_string() + encoding + "']")),
     }
 }
 
-fn encode_base_64(variant: &str, input: &str) -> ResultsIn<String> {
-    match variant {
+fn encode_base_64(operation: &str, input: &str) -> Result<String> {
+    match operation {
         "encode" => Ok(base64::encode(input)),
         "decode" => base64::decode(input),
-        _ => to_error(&("[Uknown variant '".to_string() + variant + "']")),
+        _ => to_invalid_operation(operation),
     }
 }
 
-fn encode_html(variant: &str, input: &str) -> ResultsIn<String> {
-    match variant {
+fn encode_html(operation: &str, input: &str) -> Result<String> {
+    match operation {
         "escape" => Ok(html::encode(input)),
         "unescape" => html::decode(input),
-        _ => to_error(&("[Uknown variant '".to_string() + variant + "']")),
+        _ => to_invalid_operation(operation),
     }
 }
 
-fn encode_url(variant: &str, input: &str) -> ResultsIn<String> {
-    match variant {
+fn encode_url(operation: &str, input: &str) -> Result<String> {
+    match operation {
         "escape" => Ok(url::encode(input)),
         "unescape" => url::decode(input),
-        _ => to_error(&("[Uknown variant '".to_string() + variant + "']")),
+        _ => to_invalid_operation(operation),
     }
 }
 
-fn to_error(message: &str) -> ResultsIn<String> {
-    Err(SimpleError::boxed(message))
+fn to_invalid_operation(operation: &str) -> Result<String> {
+    Err(Error::invalid_value(&("[Uknown operation '".to_string() + operation + "']")))
+}
+
+fn to_invalid_value(message: &str) -> Result<String> {
+    Err(Error::invalid_value(message))
 }

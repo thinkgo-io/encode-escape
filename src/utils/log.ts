@@ -9,8 +9,8 @@ export const SKIP_BACKEND = true;
 export function log(message: string, toBackend = SKIP_BACKEND) {
 
 	console.log(message);
-	if (toBackend)
-		fireAndForget(() => send_log(message));
+	// if (toBackend)
+	// 	fireAndForget(() => send_log(message));
 }
 
 export function logError(context: string, error: Error) {

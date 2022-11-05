@@ -1,18 +1,14 @@
-use crate::data::result::TResult;
-use crate::error::invalid_value;
-use crate::ResultsIn;
+use crate::error::Error;
+use crate::error::Result;
 
-pub fn to_utf8(value: &[u8]) -> ResultsIn<String> {
-    match String::from_utf8(value.to_vec()) {
-        Ok(decoded) => Ok(decoded),
-        Err(error) => Err(Box::new(error)),
-    }
+pub fn to_utf8(value: &[u8]) -> Result<String> {
+    Ok(String::from_utf8(value.to_vec())?)
 }
 
-pub fn trim_not_empty(text: &str) -> TResult<&str> {
+pub fn trim_not_empty(text: &str) -> Result<&str> {
     let trimmed = text.trim();
     if trimmed.is_empty() {
-        return Err(invalid_value("value is empty".to_string()));
+        return Err(Error::invalid_value("value is empty"));
     }
     Ok(trimmed)
 }

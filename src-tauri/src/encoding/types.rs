@@ -10,7 +10,7 @@ use serde::{Deserialize, Serialize};
 /// 	name	&str		@ pub, static
 /// 	label	&str		@ pub, static
 /// 	description	&str		@ pub, static
-/// 	variants	Vec:Variant		@ pub, static
+/// 	operations	Vec:Operation		@ pub, static
 ///
 ///
 /// ── End Def ─────────────────
@@ -20,7 +20,7 @@ pub struct Encoding {
     pub name: &'static str,
     pub label: &'static str,
     pub description: &'static str,
-    pub variants: Vec<Variant>,
+    pub operations: Vec<Operation>,
 }
 
 impl Encoding {
@@ -28,13 +28,13 @@ impl Encoding {
         name: &'static str,
         label: &'static str,
         description: &'static str,
-        variants: Vec<Variant>,
+        operations: Vec<Operation>,
     ) -> Self {
         Encoding {
             name,
             label,
             description,
-            variants,
+            operations,
         }
     }
 }
@@ -43,11 +43,12 @@ impl Encoding {
 ///
 /// ── Crank Def ───────────────
 ///
-/// Variant
+/// Operation
 ///
 /// Properties:
 ///
 /// 	name	&str		@ pub static
+/// 	reverse	&str		@ pub static
 /// 	label	&str		@ pub static
 /// 	description	&str		@ pub static
 ///
@@ -55,21 +56,21 @@ impl Encoding {
 /// ── End Def ─────────────────
 
 #[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
-pub struct Variant {
+pub struct Operation {
     pub name: &'static str,
     pub reverse: &'static str,
     pub label: &'static str,
     pub description: &'static str,
 }
 
-impl Variant {
+impl Operation {
     pub fn new(
         name: &'static str,
         reverse: &'static str,
         label: &'static str,
         description: &'static str,
     ) -> Self {
-        Variant {
+        Operation {
             name,
             reverse,
             label,

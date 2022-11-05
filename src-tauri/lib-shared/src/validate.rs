@@ -1,28 +1,43 @@
-use crate::data::result::TResult;
-use crate::error::{error, invalid_value};
-use std::error::Error;
+// Types ──────────────────────────────────────────────────────────────────── //
 
-pub fn check_no_error<T, E: Error>(result: &Result<T, E>) -> TResult<()> {
-    match result {
-        Ok(_) => Ok(()),
-        Err(actual) => Err(error(actual.to_string())),
+/// Created with CodeCrank
+///
+/// ── Crank Def ───────────────
+///
+/// Invalid
+///
+/// Properties:
+///
+/// 	message	String		@ pub
+///
+/// ── End Def ─────────────────
+
+#[derive(Debug, PartialEq, Clone)]
+pub struct Invalid {
+    pub details: String,
+}
+
+impl Invalid {
+    pub fn new(details: &str) -> Self {
+        Invalid {
+            details: details.to_string(),
+        }
     }
 }
 
-pub fn check_not_empty(value: &str) -> TResult<()> {
-    if value.is_empty() {
-        return Err(invalid_value("value is empty".to_string()));
+// Validations ────────────────────────────────────────────────────────────── //
+
+pub fn check(valid: bool, details: &str) -> Option<Invalid> {
+    if !valid {
+        return Some(Invalid::new(details));
     }
-    Ok(())
+    None
 }
 
-pub fn check_parsed_ok<T, E>(
-    value: &str,
-    result: &Result<T, E>,
-    error_message: &str,
-) -> TResult<()> {
-    if result.is_err() {
-        return Err(invalid_value(format!("'{}' {}.", value, error_message)));
-    }
-    Ok(())
+pub fn check_not_empty(value: &str) -> Option<Invalid> {
+    check(value.is_empty(), "The value is empty.")
+}
+
+pub fn check_not_blank(value: &str) -> Option<Invalid> {
+    check(value.trim().is_empty(), "The value is blank.")
 }

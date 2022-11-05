@@ -1,7 +1,7 @@
 import {get, writable} from "svelte/store";
-import type {Encoding, Variant} from "../types/encode";
+import type {Encoding, Operation} from "../types/encoding";
 import {input, result} from "../store/content";
-import {encodings, encoding, variant, encodingList, variantList} from "../store/encode";
+import {encodings, encoding, operation, encodingList, operationList} from "../store/encoding";
 
 import { getEncoding as getEncodingFromItems, getVariant, toEncodingList, toVariantList } from "../domain/encode_utils";
 import { log } from "../utils/log";
@@ -10,9 +10,9 @@ import { log } from "../utils/log";
 
 export function setEncoding(value: Encoding) {
     encoding.set(value.name);
-    variantList.set(toVariantList(value.variants));
-    variant.set(value.variants[0].name);
-    log("Set Encoding:\n  Encoding: " + get(encoding) + "\n  Variant: " + get(variant));
+    operationList.set(toVariantList(value.operations));
+    operation.set(value.operations[0].name);
+    log("Set Encoding:\n  Encoding: " + get(encoding) + "\n  Variant: " + get(operation));
 }
 
 export function setEncodingByName(name: string) {
@@ -45,6 +45,6 @@ function swapContent() {
 }
 
 function swapVariants() {
-    const original = getVariant(getEncoding().variants, get(variant));
-    variant.set(original.reverse);
+    const original = getVariant(getEncoding().operations, get(operation));
+    operation.set(original.reverse);
 }

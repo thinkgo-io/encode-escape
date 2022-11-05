@@ -3,8 +3,8 @@ use std::fs::remove_file;
 use std::path::Path;
 use std::time::SystemTime;
 
-use crate::ResultsIn;
-use crate::ResultsInOk;
+use crate::error::Result;
+use crate::error::ResultOk;
 
 // Types ──────────────────────────────────────────────────────────────────── //
 
@@ -50,7 +50,7 @@ impl FileMonitor {
 
 /// Deletes a file.
 /// Only deletes if the file exists.
-pub fn delete(file_name: &str) -> ResultsInOk {
+pub fn delete(file_name: &str) -> ResultOk {
     if file_exists(file_name) {
         remove_file(file_name)?;
     }
@@ -83,11 +83,11 @@ pub fn no_file_exists(file_name: &str) -> bool {
     !file_exists(file_name)
 }
 
-pub fn read_string(path: &str) -> ResultsIn<String> {
+pub fn read_string(path: &str) -> Result<String> {
     let contents = std::fs::read_to_string(path)?;
     Ok(contents)
 }
 
-pub fn write_string(path: &str, contents: String) -> ResultsInOk {
+pub fn write_string(path: &str, contents: String) -> ResultOk {
     Ok(std::fs::write(path, contents.as_bytes())?)
 }

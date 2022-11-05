@@ -1,10 +1,8 @@
-use shared::ResultsIn;
+use shared::Result;
 
-pub fn decode(value: &str) -> ResultsIn<String> {
-    match urlencoding::decode(value) {
-        Ok(decoded) => Ok(decoded.into_owned()),
-        Err(error) => Err(Box::new(error)),
-    }
+pub fn decode(value: &str) -> Result<String> {
+    let decoded = urlencoding::decode(value)?;
+    Ok(decoded.into_owned())
 }
 
 pub fn encode(value: &str) -> String {

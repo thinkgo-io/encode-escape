@@ -69,18 +69,30 @@
       autocomplete="off"
       checked={item.id === selected || null}
     />
-    <label
-      class="btn btn-outline-secondary toolbar-item"
-      for="{name}-{item.id}"
-      on:click={() => onSelect(item)}
-      on:keydown={() => onSelect(item)}>{item.label}</label
-    >
+    {#if item.tooltip}
+      <label
+        class="btn btn-outline-secondary toolbar-item"
+        for="{name}-{item.id}"
+        data-toggle="tooltip"
+        data-placement="bottom"
+        title={item.tooltip}
+        on:click={() => onSelect(item)}
+        on:keydown={() => onSelect(item)}>{item.label}</label
+      >
+    {:else}
+      <label
+        class="btn btn-outline-secondary toolbar-item"
+        for="{name}-{item.id}"
+        on:click={() => onSelect(item)}
+        on:keydown={() => onSelect(item)}>{item.label}</label
+      >
+    {/if}
   {/each}
 </div>
 
 <style>
   label {
     transition: none;
-    min-width: 8em;
+    min-width: 6em;
   }
 </style>

@@ -1,9 +1,9 @@
-use shared::ResultsIn;
+use shared::Result;
 
 use html_escape::decode_html_entities;
 use html_escape::encode_text;
 
-pub fn decode(value: &str) -> ResultsIn<String> {
+pub fn decode(value: &str) -> Result<String> {
     Ok(decode_html_entities(value).into_owned().to_string())
 }
 

@@ -11,7 +11,8 @@
 
   const dispatch = createEventDispatcher();
 
-  $: label = getLabel(items, unselectedLabel);
+  $: label = getLabel();
+  $: tooltip = getTooltip();
 
   // Functions ──────────────────────────────────────────── //
 
@@ -19,9 +20,17 @@
     return item.id === selected;
   }
 
-  function getLabel(items: ListItem[], unselectedLabel: string): string {
-    for (const item of items) if (isSelected(item)) return item.label;
-    return unselectedLabel;
+  function getLabel(): string {
+    return getSelected()?.label || unselectedLabel;
+  }
+
+  function getSelected(): ListItem | null {
+    for (const item of items) if (isSelected(item)) return item;
+    return null;
+  }
+
+  function getTooltip(): string {
+    return getSelected()?.tooltip || "";
   }
 
   /* Action Handlers ─────────────────────────────────────── */
@@ -33,14 +42,28 @@
 </script>
 
 <div class="dropdown item">
-  <button
-    class="btn btn-secondary dropdown-toggle toolbar-item"
-    type="button"
-    data-bs-toggle="dropdown"
-    aria-expanded="false"
-  >
-    {label}
-  </button>
+  {#if tooltip}
+    <button
+      class="btn btn-secondary dropdown-toggle toolbar-item"
+      type="button"
+      data-bs-toggle="dropdown"
+      data-toggle="dropdown"
+      data-placement="bottom"
+      title={tooltip}
+      aria-expanded="false"
+    >
+      {label}
+    </button>
+  {:else}
+    <button
+      class="btn btn-secondary dropdown-toggle toolbar-item"
+      type="button"
+      data-bs-toggle="dropdown"
+      aria-expanded="false"
+    >
+      {label}
+    </button>
+  {/if}
   <ul class="dropdown-menu dropdown-menu-dark toolbar-item">
     {#each items as item}
       <li
@@ -48,9 +71,20 @@
         on:click={() => onSelect(item)}
         on:keydown={() => onSelect(item)}
       >
-        <a class="dropdown-item">
-          {item.label}
-        </a>
+        {#if item.tooltip}
+          <a
+            class="dropdown-item"
+            data-bs-toggle="tooltip"
+            data-bs-placement="bottom"
+            title={item.tooltip}
+          >
+            {item.label}
+          </a>
+        {:else}
+          <a class="dropdown-item">
+            {item.label}
+          </a>
+        {/if}
       </li>
     {/each}
   </ul>

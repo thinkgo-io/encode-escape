@@ -9,7 +9,7 @@ import { log, logError, TO_BACKEND } from "./utils/log";
 
 try {
   log("main - starting", TO_BACKEND);
-  setEncodings(await getEncodings());
+  // setEncodings(await getEncodings());
 }
 catch (error) {
   logError("main - initialize", error);

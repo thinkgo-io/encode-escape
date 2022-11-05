@@ -10,12 +10,28 @@
   import type { ListItem } from "./types/listItem";
 
   import { input, result } from "./store/content";
-  import { encodingList, encoding, variantList, variant } from "./store/encode";
+  import {
+    encodingList,
+    encoding,
+    operationList,
+    operation,
+  } from "./store/encoding";
 
   import { encode } from "./backend/encode";
   import { setEncodingByName, swap } from "./domain/encode";
+  import { getEncodings } from "./backend/encode";
+  import { setEncodings } from "./domain/encode";
+  import { onMount } from "svelte";
+
+  onMount(async () => {
+    setEncodings(await getEncodings());
+  });
 
   /* Functions  ─────────────────────────────────────────── */
+
+  async function encodeIt() {
+    result.set(await encode($encoding, $operation, $input));
+  }
 
   function reportError(context: string, error: Error) {
     result.set(error.message);
@@ -35,8 +51,8 @@
 
   async function onEncode() {
     try {
-      log("On Encode: " + $encoding + " - " + $variant);
-      result.set(await encode($encoding, $variant, $input));
+      log("On Encode: " + $encoding + " - " + $operation);
+      encodeIt();
     } catch (error) {
       reportError("App - onJustDoIt", error);
     }
@@ -56,15 +72,17 @@
     try {
       log("On Select Encoding: " + JSON.stringify(event.detail));
       setEncodingByName(event.detail.id);
+      encodeIt();
     } catch (error) {
       reportError("App - onSwap", error);
     }
   }
 
-  async function onSelectVariant(event) {
+  async function onSelectOperation(event) {
     try {
-      log("On Select Variant: " + JSON.stringify(event.detail));
-      variant.set(event.detail.id);
+      log("On Select Operation: " + JSON.stringify(event.detail));
+      operation.set(event.detail.id);
+      encodeIt();
     } catch (error) {
       reportError("App - onSwap", error);
     }
@@ -80,18 +98,18 @@
   />
 
   <RadioBar
-    name="variant"
-    bind:items={$variantList}
-    bind:selected={$variant}
-    on:select={(event) => onSelectVariant(event)}
+    name="operation"
+    bind:items={$operationList}
+    bind:selected={$operation}
+    on:select={(event) => onSelectOperation(event)}
   />
 
-  <Button on:click={onSwap}>
+  <Button on:click={onSwap} tooltip={"Swap input and results text."}>
     <Swap />
     Swap
   </Button>
 
-  <Button on:click={onCopy}>
+  <Button on:click={onCopy} tooltip={"Copy results to the clipboard."}>
     <Copy />
     Copy
   </Button>

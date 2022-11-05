@@ -1,28 +1,29 @@
 use tauri::command;
+use tauri::Result;
+use tauri::Window;
 
 use encode::encode;
 
-use crate::constants;
+use crate::encoding::get_encodings;
+use crate::encoding::Encoding;
 use crate::log::*;
-use crate::types::Encoding;
 
 #[command]
-pub fn get_encodings() -> Vec<Encoding> {
+pub fn on_get_encodings() -> Vec<Encoding> {
     log("Get Encodings");
-
-    constants::get_encodings()
+    get_encodings()
 }
 
 #[command]
-pub fn on_encode(encoding: &str, variant: &str, input: &str) -> String {
+pub fn on_encode(encoding: &str, operation: &str, input: &str) -> String {
     log_lines(vec![
         "On Encoding:",
         &format!("  Encoding: {}", encoding),
-        &format!("  Variant:  {}", variant),
+        &format!("  Operation:  {}", operation),
         &format!("  Input:    {}", input),
     ]);
 
-    match encode(&encoding.to_lowercase(), &variant.to_lowercase(), input) {
+    match encode(&encoding.to_lowercase(), &operation.to_lowercase(), input) {
         Ok(output) => output,
         Err(error) => error.to_string(),
     }
@@ -36,6 +37,11 @@ pub fn on_log(message: &str) {
 #[command]
 pub fn on_log_error(context: &str, message: &str) {
     log_error(context, message);
+}
+
+#[command]
+pub fn on_set_title(window: Window, title: String) -> Result<()> {
+    window.set_title(&title)
 }
 
 #[command]

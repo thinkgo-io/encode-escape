@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api/tauri";
 
-import type { Encoding } from "../types/encode";
+import type { Encoding } from "../types/encoding";
 
 export async function log(message: String) {
     return invoke("on_log" , {
