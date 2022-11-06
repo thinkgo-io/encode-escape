@@ -106,7 +106,9 @@ impl Error {
 impl Display for Error {
     fn fmt(&self, f: &mut Formatter<'_>) -> fmt::Result {
         match self {
-            Error::Error { description, cause } => write!(f, "Error: {} - {:?}", description, cause),
+            Error::Error { description, cause } => {
+                write!(f, "Error: {} - {:?}", description, cause)
+            }
             Error::InvalidConfiguration { description } => {
                 write!(f, "Invalid Configuration: {}", description)
             }
@@ -123,36 +125,30 @@ impl Display for Error {
 
 impl From<Box<dyn std::error::Error>> for Error {
     fn from(cause: Box<dyn std::error::Error>) -> Self {
-        Error::with_cause(
-            "Error",
-            cause,
-        )
+        Error::with_cause("Error", cause)
+    }
+}
+
+impl From<std::env::VarError> for Error {
+    fn from(cause: std::env::VarError) -> Self {
+        Error::with_cause("Var Error", Box::new(cause))
     }
 }
 
 impl From<std::io::Error> for Error {
     fn from(cause: std::io::Error) -> Self {
-        Error::with_cause (
-            "IO Error",
-            Box::new(cause),
-        )
+        Error::with_cause("IO Error", Box::new(cause))
     }
 }
 
 impl From<std::num::ParseIntError> for Error {
     fn from(cause: std::num::ParseIntError) -> Self {
-        Error::with_cause(
-            "Parse Int Error",
-            Box::new(cause),
-        )
+        Error::with_cause("Parse Int Error", Box::new(cause))
     }
 }
 
 impl From<std::string::FromUtf8Error> for Error {
     fn from(cause: std::string::FromUtf8Error) -> Self {
-        Error::with_cause(
-            "From UTF8 Error",
-            Box::new(cause),
-        )
+        Error::with_cause("From UTF8 Error", Box::new(cause))
     }
 }

@@ -7,6 +7,4 @@ edition = "2021"
 path="src/lib_shared.rs"
 
 [dependencies]
-anyhow = "1.0"
 shellexpand = "2"
-thiserror = "1.0"
