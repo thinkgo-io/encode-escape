@@ -1,7 +1,6 @@
-use shared::error::Error;
-use shared::strings::to_utf8;
-use shared::Result;
 use base64::DecodeError;
+use shared::prelude::*;
+use shared::utils::strings::to_utf8;
 
 pub fn decode(value: &str) -> Result<String> {
     let decoded = base64::decode(value).map_err(to_invalid_value)?;

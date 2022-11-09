@@ -2,8 +2,7 @@ pub mod base64;
 pub mod html;
 pub mod url;
 
-use shared::error::Error;
-use shared::Result;
+use shared::prelude::*;
 
 pub fn encode(encoding: &str, operation: &str, input: &str) -> Result<String> {
     match encoding {

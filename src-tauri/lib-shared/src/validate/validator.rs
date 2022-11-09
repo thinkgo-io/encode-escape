@@ -1,3 +1,4 @@
+use crate::prelude::*;
 use crate::validate::Invalid;
 
 /// Created with CodeCrank
@@ -79,10 +80,10 @@ impl Validator {
         }
     }
 
-    pub fn result(&self) -> Result<(), String> {
+    pub fn result(&self) -> Result<()> {
         match self.errors.is_empty() {
             true => Ok(()),
-            false => Err(self.join_details()),
+            false => Err(Error::invalid_value(&self.join_details())),
         }
     }
 

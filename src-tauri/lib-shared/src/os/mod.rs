@@ -1,17 +1,17 @@
-pub mod constants;
 pub mod linux;
 pub mod macos;
 pub mod types;
 pub mod windows;
 
-pub use types::OSType;
-pub use types::OS;
+use crate::prelude::*;
+use std::env::consts;
+use types::*;
 
-pub fn get_os() -> OS {
+pub fn get_os_settings() -> Result<OSSettings> {
     match consts::OS {
-        "linux" => OS::linux.get_os(),
-        "macos" => OS::macos.get_os(),
-        "windows" => OS::windows.get_so(),
-        _ => OS::linux.get_os(),
+        "linux" => linux::get_os(),
+        "macos" => macos::get_os(),
+        "windows" => windows::get_os(),
+        _ => linux::get_os(),
     }
 }

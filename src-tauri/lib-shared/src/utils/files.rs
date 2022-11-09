@@ -3,8 +3,7 @@ use std::fs::remove_file;
 use std::path::Path;
 use std::time::SystemTime;
 
-use crate::error::Result;
-use crate::error::ResultOk;
+use crate::prelude::*;
 
 // Types ──────────────────────────────────────────────────────────────────── //
 

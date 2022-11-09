@@ -3,8 +3,7 @@ use shellexpand::LookupError;
 use std::env::var;
 use std::env::VarError;
 
-use crate::error::Error;
-use crate::Result;
+use crate::prelude::*;
 
 pub fn environment(name: &str) -> Result<String> {
     Ok(var(name)?)

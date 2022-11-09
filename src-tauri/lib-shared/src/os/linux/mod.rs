@@ -1,19 +1,21 @@
-use os::OS;
-use os::OSType;
-use os::linux::constants::*;
-use expand::*;
+pub mod constants;
 
-pub fn get_os() -> Result<OS> {
+use crate::prelude::*;
 
-    let home = environment(USER_APP_SETTINGS_SUBDIR);
-    let settings = home.to_string() + FILE_SEPARATOR + USER_APP_SETTINGS_SUBDIR;
+use crate::environment::*;
+use crate::os::linux::constants::*;
+use crate::os::*;
 
-    OS::Builder::new()
-        .os(OSType::MacOS)
-        .newline(NEWLINE)
-        .file_separator(FILE_SEPARATOR)
-        .path_separator(PATH_SEPARATOR)
-        .user_home_dir(home)
-        .user_settings_dir(settings)
-        .build()
+pub fn get_os() -> Result<OSSettings> {
+    let home = environment(USER_APP_SETTINGS_SUBDIR)?;
+    let settings = [&home, FILE_SEPARATOR, USER_APP_SETTINGS_SUBDIR].concat();
+
+    Ok(OSSettings {
+        os: OS::Linux,
+        newline: NEWLINE.to_string(),
+        file_separator: FILE_SEPARATOR.to_string(),
+        path_separator: PATH_SEPARATOR.to_string(),
+        user_home_dir: home,
+        user_settings_dir: settings,
+    })
 }

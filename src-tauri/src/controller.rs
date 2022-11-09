@@ -4,8 +4,8 @@ use tauri::Window;
 
 use encode::encode;
 
-use crate::encoding::get_encodings;
-use crate::encoding::Encoding;
+use crate::data::encoding_data::get_encodings;
+use crate::encoding::types::Encoding;
 use crate::log::*;
 
 #[command]

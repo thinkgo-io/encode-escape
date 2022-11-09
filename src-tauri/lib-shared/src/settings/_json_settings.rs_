@@ -1,0 +1,49 @@
+// Not working
+
+// Didn't figure out how to properly serialize / deserialize.
+// serialize needs error conversion -> shared::error::Error
+// deserialize needs lifetime issues resolved.
+
+use crate::prelude::*;
+use crate::utils::files::file_exists;
+use serde::{Deserialize, Serialize};
+use std::fs::create_dir_all;
+use std::fs::read_to_string;
+use std::fs::write;
+
+struct JsonSettingsFile {
+    directory: String,
+    file: String,
+}
+
+impl JsonSettingsFile {
+    pub fn new(directory: &str, file: &str) -> Self {
+        JsonSettingsFile {
+            directory: directory.to_string(),
+            file: file.to_string(),
+        }
+    }
+
+    pub fn exists(&self) -> bool {
+        file_exists(&self.path())
+    }
+
+    pub fn read<T: Deserialize>(&self) -> Result<T> {
+        Ok(serde_json::from_str(read_to_string(self.path())?)?)
+    }
+
+    pub fn write<T: Serialize>(&self, item: &T) -> Result<()> {
+        create_dir_all(&self.directory)?;
+        write(&self.path(), serde_json::to_string(item))?;
+        Ok(())
+    }
+
+    pub fn path(&self) -> String {
+        format!("{}/{}", self.directory, self.file)
+    }
+
+    fn create_directories(&self) -> Result<()> {
+        create_dir_all(&self.directory)?;
+        Ok(())
+    }
+}

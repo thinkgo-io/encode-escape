@@ -1,4 +1,4 @@
-use shared::Result;
+use shared::prelude::*;
 
 pub fn decode(value: &str) -> Result<String> {
     let decoded = urlencoding::decode(value)?;

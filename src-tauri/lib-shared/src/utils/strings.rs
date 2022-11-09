@@ -1,5 +1,4 @@
-use crate::error::Error;
-use crate::error::Result;
+use crate::prelude::*;
 
 pub fn to_utf8(value: &[u8]) -> Result<String> {
     Ok(String::from_utf8(value.to_vec())?)

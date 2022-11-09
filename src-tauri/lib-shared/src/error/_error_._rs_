@@ -1,9 +1,6 @@
 use std::fmt;
 use std::fmt::{Display, Formatter};
 
-pub type Result<T> = std::result::Result<T, Error>;
-pub type ResultOk = std::result::Result<(), Error>;
-
 #[derive(Debug)]
 pub enum Error {
     Error {
@@ -123,32 +120,4 @@ impl Display for Error {
     }
 }
 
-impl From<Box<dyn std::error::Error>> for Error {
-    fn from(cause: Box<dyn std::error::Error>) -> Self {
-        Error::with_cause("Error", cause)
-    }
-}
-
-impl From<std::env::VarError> for Error {
-    fn from(cause: std::env::VarError) -> Self {
-        Error::with_cause("Var Error", Box::new(cause))
-    }
-}
-
-impl From<std::io::Error> for Error {
-    fn from(cause: std::io::Error) -> Self {
-        Error::with_cause("IO Error", Box::new(cause))
-    }
-}
-
-impl From<std::num::ParseIntError> for Error {
-    fn from(cause: std::num::ParseIntError) -> Self {
-        Error::with_cause("Parse Int Error", Box::new(cause))
-    }
-}
-
-impl From<std::string::FromUtf8Error> for Error {
-    fn from(cause: std::string::FromUtf8Error) -> Self {
-        Error::with_cause("From UTF8 Error", Box::new(cause))
-    }
-}
+impl std::error::Error for Error {}

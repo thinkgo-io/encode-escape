@@ -1,4 +1,4 @@
-use crate::error::Result;
+use crate::prelude::*;
 
 pub fn to_i32(text: &str) -> Result<i32> {
     let trimmed = text.trim();

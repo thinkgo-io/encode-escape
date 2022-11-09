@@ -1,4 +1,4 @@
-use shared::Result;
+use shared::prelude::*;
 
 use html_escape::decode_html_entities;
 use html_escape::encode_text;
