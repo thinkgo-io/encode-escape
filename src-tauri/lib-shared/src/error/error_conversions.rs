@@ -36,6 +36,12 @@ impl From<serde_json::Error> for Error {
     }
 }
 
+impl From<serde_yaml::Error> for Error {
+    fn from(source: serde_yaml::Error) -> Self {
+        Error::error(Box::new(source), "Serde YAML Error")
+    }
+}
+
 pub fn to_boxed_error(error: Error) -> Box<dyn std::error::Error> {
     Box::new(error)
 }

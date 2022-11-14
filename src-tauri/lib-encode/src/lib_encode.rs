@@ -1,5 +1,6 @@
 pub mod base64;
 pub mod html;
+pub mod types;
 pub mod url;
 
 use shared::prelude::*;

@@ -12,6 +12,7 @@ use app::utils::window::*;
 use crate::configure::types::*;
 use crate::controller::events::*;
 use crate::controller::frontend::*;
+use crate::controller::utils::*;
 use crate::convert::into_error::*;
 use crate::prelude::*;
 use crate::settings::defaults::*;
@@ -66,6 +67,8 @@ fn setup_window(app: &mut App, configuration: &ArcedConfiguration) -> StandardBo
     window
         .set_min_size(Some(min_window_size()))
         .map_err(tauri_error)?;
+    set_window_title(&window, &settings);
+
     let settings = normalize_settings_position(settings, &window);
     position_window(&settings.window, &mut window)?;
 

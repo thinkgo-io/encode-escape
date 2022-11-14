@@ -1,12 +1,18 @@
+use std::ops::DerefMut;
 use tauri::command;
 use tauri::Result;
+use tauri::State;
 use tauri::Window;
 
 use encode::encode;
 
+use crate::controller::utils::*;
 use crate::data::encoding_data::get_encodings;
 use crate::log::*;
+use crate::settings::types::WrappedRuntimeSettings;
 use crate::types::Encoding;
+
+// Commands ───────────────────────────────────────────────────────────────── //
 
 #[command]
 pub fn on_get_encodings() -> Vec<Encoding> {
@@ -15,13 +21,20 @@ pub fn on_get_encodings() -> Vec<Encoding> {
 }
 
 #[command]
-pub fn on_encode(encoding: &str, operation: &str, input: &str) -> String {
-    log_lines(vec![
-        "On Encoding:",
-        &format!("  Encoding: {}", encoding),
-        &format!("  Operation:  {}", operation),
-        &format!("  Input:    {}", input),
-    ]);
+pub fn on_encode(
+    encoding: &str,
+    operation: &str,
+    input: &str,
+    settings: State<'_, WrappedRuntimeSettings>,
+    window: Window,
+) -> String {
+    let mut guard = settings.lock().unwrap();
+    let settings = guard.deref_mut();
+
+    settings.encoding(encoding).operation(operation);
+    set_window_title(&window, settings);
+
+    log_encoding(settings, input);
 
     match encode(&encoding.to_lowercase(), &operation.to_lowercase(), input) {
         Ok(output) => output,

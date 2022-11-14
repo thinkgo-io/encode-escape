@@ -16,7 +16,7 @@ pub fn read_runtime_settings(file: &SettingsFile) -> Option<RuntimeSettings> {
         return None;
     }
     match file.read() {
-        Ok(content) => match serde_json::from_str(&content) {
+        Ok(content) => match serde_yaml::from_str(&content) {
             Ok(settings) => Some(settings),
             Err(error) => {
                 log_and_return("Couldn't deserialize runtime settings", Error::from(error))
@@ -40,7 +40,7 @@ pub fn update_runtime_settings_window(window: &Window, settings: &mut RuntimeSet
 }
 
 pub fn write_runtime_settings(settings: &RuntimeSettings, file: &SettingsFile) {
-    match serde_json::to_string(settings) {
+    match serde_yaml::to_string(settings) {
         Ok(content) => match file.write(&content) {
             Ok(_) => (),
             Err(error) => log_error("Couldn't write runtime settings file", error),
