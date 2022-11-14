@@ -5,8 +5,8 @@ use tauri::Window;
 use encode::encode;
 
 use crate::data::encoding_data::get_encodings;
-use crate::encoding::types::Encoding;
 use crate::log::*;
+use crate::types::Encoding;
 
 #[command]
 pub fn on_get_encodings() -> Vec<Encoding> {

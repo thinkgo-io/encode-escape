@@ -1,6 +1,6 @@
 use serde::{Deserialize, Serialize};
 
-use crate::encoding::types::Operation;
+use crate::types::Operation;
 
 /// Created with CodeCrank
 ///

@@ -31,4 +31,19 @@ impl RuntimeSettings {
             window,
         }
     }
+
+    pub fn encoding(mut self, encoding: &str) -> Self {
+        self.encoding = encoding.to_string();
+        self
+    }
+
+    pub fn operation(mut self, operation: &str) -> Self {
+        self.operation = operation.to_string();
+        self
+    }
+
+    pub fn window(mut self, window: Window) -> Self {
+        self.window = window;
+        self
+    }
 }

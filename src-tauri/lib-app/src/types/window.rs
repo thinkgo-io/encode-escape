@@ -1,3 +1,4 @@
+use float_eq::float_eq;
 use serde::{Deserialize, Serialize};
 
 /// Created with CodeCrank
@@ -20,7 +21,7 @@ use serde::{Deserialize, Serialize};
 ///
 /// ── End Def ─────────────────
 
-#[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Window {
     pub monitor: Option<String>,
     pub x: f64, // From Left
@@ -47,5 +48,16 @@ impl Window {
             height,
             maximized,
         }
+    }
+}
+
+impl PartialEq<Window> for Window {
+    fn eq(&self, other: &Window) -> bool {
+        self.monitor == other.monitor
+            && float_eq!(self.x, other.x, abs <= 0.001)
+            && float_eq!(self.y, other.y, abs <= 0.001)
+            && float_eq!(self.width, other.width, abs <= 0.001)
+            && float_eq!(self.height, other.height, abs <= 0.001)
+            && self.maximized == other.maximized
     }
 }

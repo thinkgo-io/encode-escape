@@ -7,7 +7,7 @@ use crate::os::linux::constants::*;
 use crate::os::*;
 
 pub fn get_os() -> Result<OSSettings> {
-    let home = environment(USER_APP_SETTINGS_SUBDIR)?;
+    let home = environment(USER_HOME_DIR_VARIABLE)?;
     let settings = [&home, FILE_SEPARATOR, USER_APP_SETTINGS_SUBDIR].concat();
 
     Ok(OSSettings {

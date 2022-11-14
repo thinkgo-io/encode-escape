@@ -2,37 +2,37 @@ use crate::error::Error;
 
 impl From<Box<dyn std::error::Error>> for Error {
     fn from(source: Box<dyn std::error::Error>) -> Self {
-        Error::error("Error", source)
+        Error::error(source, "Error")
     }
 }
 
 impl From<std::env::VarError> for Error {
     fn from(source: std::env::VarError) -> Self {
-        Error::error("Var Error", Box::new(source))
+        Error::error(Box::new(source), "Var Error")
     }
 }
 
 impl From<std::io::Error> for Error {
     fn from(source: std::io::Error) -> Self {
-        Error::error("IO Error", Box::new(source))
+        Error::error(Box::new(source), "IO Error")
     }
 }
 
 impl From<std::num::ParseIntError> for Error {
     fn from(source: std::num::ParseIntError) -> Self {
-        Error::error("Parse Int Error", Box::new(source))
+        Error::error(Box::new(source), "Parse Int Error")
     }
 }
 
 impl From<std::string::FromUtf8Error> for Error {
     fn from(source: std::string::FromUtf8Error) -> Self {
-        Error::error("UTF8 Error", Box::new(source))
+        Error::error(Box::new(source), "UTF8 Error")
     }
 }
 
 impl From<serde_json::Error> for Error {
     fn from(source: serde_json::Error) -> Self {
-        Error::error("Serde JSON Error", Box::new(source))
+        Error::error(Box::new(source), "Serde JSON Error")
     }
 }
 

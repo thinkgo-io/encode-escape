@@ -48,10 +48,10 @@ impl OSSettings {
     }
 
     pub fn join(&self, dir: &str, subpath: &str) -> String {
-        format!("{}{}{}", dir, self.path_separator, subpath)
+        format!("{}{}{}", dir, self.file_separator, subpath)
     }
 
     pub fn join_vec(&self, paths: Vec<&str>) -> String {
-        paths.join(&self.path_separator)
+        paths.join(&self.file_separator)
     }
 }

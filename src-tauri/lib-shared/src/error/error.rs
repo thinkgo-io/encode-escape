@@ -2,8 +2,8 @@
 pub enum Error {
     #[error("Error: {description} - {source}")]
     Error {
-        description: String,
         source: Box<dyn std::error::Error>,
+        description: String,
     },
 
     #[error("Error: {description}")]
@@ -26,7 +26,7 @@ pub enum Error {
 }
 
 impl Error {
-    pub fn error(description: &str, source: Box<dyn std::error::Error>) -> Error {
+    pub fn error(source: Box<dyn std::error::Error>, description: &str) -> Error {
         Error::Error {
             description: String::from(description),
             source,
