@@ -1,4 +1,4 @@
-use shared::prelude::*;
+use serde::{Deserialize, Serialize};
 
 /// Created with CodeCrank
 ///
@@ -6,15 +6,17 @@ use shared::prelude::*;
 ///
 /// EncodeOperation
 ///
+/// Options: serialize
+///
 /// Properties:
 ///
 /// 	encoding	String		@ pub
 /// 	operation	String		@ pub
 ///
-///
 /// ── End Def ─────────────────
 
-#[derive(Debug, PartialEq, Copy, Clone)]
+#[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
+
 pub struct EncodeOperation {
     pub encoding: String,
     pub operation: String,

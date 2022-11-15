@@ -1,12 +1,10 @@
-mod configure;
 mod controller;
-mod convert;
 mod data;
+mod domain;
 mod log;
 mod prelude;
-mod settings;
 mod start;
-mod types;
+mod system;
 mod utils;
 
 use crate::start::main::start;

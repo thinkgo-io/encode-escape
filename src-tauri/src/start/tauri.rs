@@ -9,14 +9,14 @@ use tauri::Window;
 use app::types::Window as WindowSetting;
 use app::utils::window::*;
 
-use crate::configure::types::*;
 use crate::controller::events::*;
 use crate::controller::frontend::*;
 use crate::controller::utils::*;
-use crate::convert::into_error::*;
 use crate::prelude::*;
-use crate::settings::defaults::*;
-use crate::settings::types::RuntimeSettings;
+use crate::system::configure::types::*;
+use crate::system::settings::defaults::*;
+use crate::system::settings::types::RuntimeSettings;
+use crate::utils::convert::into_error::*;
 use crate::utils::tauri::*;
 use shared::prelude::*;
 
@@ -30,6 +30,7 @@ pub fn start(configuration: &ArcedConfiguration) -> StandardBoxedResultOk {
         .setup(|app| setup_tauri(app, configuration_1))
         .invoke_handler(generate_handler![
             on_get_encodings,
+            on_get_current_encode_operation,
             on_encode,
             on_log,
             on_log_error,
@@ -74,6 +75,7 @@ fn setup_window(app: &mut App, configuration: &ArcedConfiguration) -> StandardBo
 
     set_runtime_settings(configuration, settings);
 
+    window.show();
     Ok(())
 }
 

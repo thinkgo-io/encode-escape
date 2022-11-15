@@ -1,11 +1,11 @@
+use shared::convert::sync::*;
 use shared::os::types::OSSettings;
 use shared::settings::SettingsFile;
 use std::sync::Arc;
 use std::sync::Mutex;
 
-use crate::configure::types::Configuration;
-use crate::settings::types::*;
-use crate::utils::sync::*;
+use crate::system::configure::types::Configuration;
+use crate::system::settings::types::*;
 
 /// Created with CodeCrank
 ///

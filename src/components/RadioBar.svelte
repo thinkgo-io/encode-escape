@@ -23,20 +23,6 @@
 
   $: selectedBind = { items, selected };
 
-  log("Radio - Init");
-
-  onMount(async () => {
-    log("Radio - onMount");
-  });
-  //
-  //   beforeUpdate(async () => {
-  //     alert("Radio - beforeUpdate");
-  //   });
-  //
-  //   afterUpdate(async () => {
-  //     alert("Radio - afterUpdate");
-  //   });
-
   /* Functions ──────────────────────────────────────────── */
 
   function getChecked(item: ListItem): string {

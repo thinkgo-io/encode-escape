@@ -1,5 +1,5 @@
-use crate::types::Encoding;
-use crate::types::Operation;
+use crate::domain::encode::types::Encoding;
+use crate::domain::encode::types::Operation;
 
 pub fn get_encodings() -> Vec<Encoding> {
     vec![

@@ -55,7 +55,7 @@ impl Validator {
         )
     }
 
-    pub fn check_not_blank_option(&mut self, name: &str, value: Option<&str>) -> bool {
+    pub fn check_not_blank_option(&mut self, name: &str, value: &Option<&str>) -> bool {
         match value {
             Some(_) => self.check_not_blank(name, value.unwrap()),
             None => self.add_invalid_none(name),
@@ -66,21 +66,21 @@ impl Validator {
         self.check(name, "The value must not be empty.", value.is_empty())
     }
 
-    pub fn check_not_empty_option(&mut self, name: &str, value: Option<&str>) -> bool {
+    pub fn check_not_empty_option(&mut self, name: &str, value: &Option<&str>) -> bool {
         match value {
             Some(_) => self.check_not_empty(name, value.unwrap()),
             None => self.add_invalid_none(name),
         }
     }
 
-    pub fn check_not_none<T>(&mut self, name: &str, value: Option<T>) -> bool {
+    pub fn check_not_none<T>(&mut self, name: &str, value: &Option<T>) -> bool {
         match value {
             Some(_) => true,
             None => self.add_invalid_none(name),
         }
     }
 
-    pub fn result(&self) -> Result<()> {
+    pub fn into_result(&self) -> Result<()> {
         match self.errors.is_empty() {
             true => Ok(()),
             false => Err(Error::invalid_value(&self.join_details())),

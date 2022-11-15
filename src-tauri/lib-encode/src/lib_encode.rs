@@ -5,13 +5,17 @@ pub mod url;
 
 use shared::prelude::*;
 
-pub fn encode(encoding: &str, operation: &str, input: &str) -> Result<String> {
-    match encoding {
-        "base64" => encode_base_64(operation, input),
-        "html" => encode_html(operation, input),
-        "url" => encode_url(operation, input),
-        "smart-url" => encode_url(operation, input),
-        _ => to_invalid_value(&("[Uknown encoding '".to_string() + encoding + "']")),
+use crate::types::EncodeOperation;
+
+pub fn encode(encode_operation: &EncodeOperation, input: &str) -> Result<String> {
+    match encode_operation.encoding.as_str() {
+        "base64" => encode_base_64(&encode_operation.operation, input),
+        "html" => encode_html(&encode_operation.operation, input),
+        "url" => encode_url(&encode_operation.operation, input),
+        "smart-url" => encode_url(&encode_operation.operation, input),
+        _ => to_invalid_value(
+            &("[Uknown encoding '".to_string() + &encode_operation.encoding + "']"),
+        ),
     }
 }
 
@@ -40,7 +44,9 @@ fn encode_url(operation: &str, input: &str) -> Result<String> {
 }
 
 fn to_invalid_operation(operation: &str) -> Result<String> {
-    Err(Error::invalid_value(&("[Uknown operation '".to_string() + operation + "']")))
+    Err(Error::invalid_value(
+        &("[Uknown operation '".to_string() + operation + "']"),
+    ))
 }
 
 fn to_invalid_value(message: &str) -> Result<String> {

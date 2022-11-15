@@ -5,3 +5,10 @@ export class Encoding {
 export class Operation {
     constructor(public name: string, public reverse: string, public label: string, public description: string){}
 }
+
+export class EncodeOperation {
+    constructor(
+        public encoding: string,
+        public operation: string
+    ) {}
+}

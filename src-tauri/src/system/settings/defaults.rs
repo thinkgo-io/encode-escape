@@ -1,5 +1,6 @@
-use crate::settings::types::RuntimeSettings;
+use crate::system::settings::types::RuntimeSettings;
 use app::types::Window;
+use encode::types::EncodeOperation;
 use tauri::LogicalSize;
 use tauri::Size;
 
@@ -13,15 +14,12 @@ pub const DEFAULT_Y: f64 = 100.0;
 pub const DEFAULT_ENCODING: &str = "base64";
 pub const DEFAULT_OPERATION: &str = "encode";
 
-pub fn min_window_size() -> Size {
-    Size::Logical(LogicalSize {
-        width: MINIMUM_WIDTH,
-        height: MINIMUM_HEIGHT,
-    })
+pub fn default_encode_operation() -> EncodeOperation {
+    EncodeOperation::new(DEFAULT_ENCODING, DEFAULT_OPERATION)
 }
 
 pub fn default_settings() -> RuntimeSettings {
-    RuntimeSettings::new(DEFAULT_ENCODING, DEFAULT_OPERATION, default_window())
+    RuntimeSettings::new(default_encode_operation(), default_window())
 }
 
 pub fn default_window() -> Window {
@@ -33,4 +31,11 @@ pub fn default_window() -> Window {
         DEFAULT_HEIGHT,
         false,
     )
+}
+
+pub fn min_window_size() -> Size {
+    Size::Logical(LogicalSize {
+        width: MINIMUM_WIDTH,
+        height: MINIMUM_HEIGHT,
+    })
 }

@@ -1,3 +1,4 @@
+use std::ops::Deref;
 use std::ops::DerefMut;
 use tauri::command;
 use tauri::Result;
@@ -5,12 +6,14 @@ use tauri::State;
 use tauri::Window;
 
 use encode::encode;
+use encode::types::EncodeOperation;
 
 use crate::controller::utils::*;
-use crate::data::encoding_data::get_encodings;
+use crate::domain::encode::data::get_encodings;
+use crate::domain::encode::encoding::*;
+use crate::domain::encode::types::Encoding;
 use crate::log::*;
-use crate::settings::types::WrappedRuntimeSettings;
-use crate::types::Encoding;
+use crate::system::settings::types::WrappedRuntimeSettings;
 
 // Commands ───────────────────────────────────────────────────────────────── //
 
@@ -21,24 +24,31 @@ pub fn on_get_encodings() -> Vec<Encoding> {
 }
 
 #[command]
+pub fn on_get_current_encode_operation(settings: State<WrappedRuntimeSettings>) -> EncodeOperation {
+    let guard = settings.lock().unwrap();
+    let settings = guard.deref();
+    settings.encode_operation.clone()
+}
+
+#[command]
 pub fn on_encode(
-    encoding: &str,
-    operation: &str,
+    encode_operation: EncodeOperation,
     input: &str,
     settings: State<'_, WrappedRuntimeSettings>,
     window: Window,
 ) -> String {
     let mut guard = settings.lock().unwrap();
     let settings = guard.deref_mut();
+    let encode_operation = normalize_encode_operation(&encode_operation);
 
-    settings.encoding(encoding).operation(operation);
+    settings.encode_operation(encode_operation);
     set_window_title(&window, settings);
 
     log_encoding(settings, input);
 
-    match encode(&encoding.to_lowercase(), &operation.to_lowercase(), input) {
+    match encode(&settings.encode_operation, input) {
         Ok(output) => output,
-        Err(error) => error.to_string(),
+        Err(error) => ["[Not Encodable]\n\n", &error.to_string()].concat(),
     }
 }
 

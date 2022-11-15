@@ -1,4 +1,5 @@
 use app::types::Window;
+use encode::types::EncodeOperation;
 use serde::{Deserialize, Serialize};
 
 /// Created with CodeCrank
@@ -9,36 +10,27 @@ use serde::{Deserialize, Serialize};
 ///
 /// Properties:
 ///
-/// 	encoding	Option:String	@ pub
-/// 	operation	Option:String	@ pub
-/// 	window		Option:Window	@ pub
-///
+/// 	encode_operation:   EncodeOperation	@ pub
+/// 	window		        Option:Window	@ pub
 ///
 /// ── End Def ─────────────────
 
 #[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
 pub struct RuntimeSettings {
-    pub encoding: String,
-    pub operation: String,
+    pub encode_operation: EncodeOperation,
     pub window: Window,
 }
 
 impl RuntimeSettings {
-    pub fn new(encoding: &str, operation: &str, window: Window) -> Self {
+    pub fn new(encode_operation: EncodeOperation, window: Window) -> Self {
         RuntimeSettings {
-            encoding: encoding.to_string(),
-            operation: operation.to_string(),
+            encode_operation,
             window,
         }
     }
 
-    pub fn encoding(&mut self, encoding: &str) -> &mut Self {
-        self.encoding = encoding.to_string();
-        self
-    }
-
-    pub fn operation(&mut self, operation: &str) -> &mut Self {
-        self.operation = operation.to_string();
+    pub fn encode_operation(&mut self, encode_operation: EncodeOperation) -> &mut Self {
+        self.encode_operation = encode_operation;
         self
     }
 

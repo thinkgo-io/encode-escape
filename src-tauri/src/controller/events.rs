@@ -5,10 +5,14 @@ use tauri::WindowEvent;
 
 use shared::settings::SettingsFile;
 
-use crate::settings::types::WrappedRuntimeSettings;
-use crate::settings::utils::*;
+use crate::system::settings::runtime_settings::*;
+use crate::system::settings::types::WrappedRuntimeSettings;
 
-pub fn on_window_event(event: GlobalWindowEvent, settings: &WrappedRuntimeSettings, file: &SettingsFile) {
+pub fn on_window_event(
+    event: GlobalWindowEvent,
+    settings: &WrappedRuntimeSettings,
+    file: &SettingsFile,
+) {
     let window = event.window();
 
     match event.event() {

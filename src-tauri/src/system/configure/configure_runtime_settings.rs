@@ -1,7 +1,8 @@
-use crate::settings::defaults::*;
-use crate::settings::types::AppSettings;
-use crate::settings::types::RuntimeSettings;
-use crate::settings::utils::runtime_settings::read_runtime_settings;
+use crate::domain::encode::encoding::validate_encode_operation;
+use crate::system::settings::defaults::*;
+use crate::system::settings::runtime_settings::read_runtime_settings;
+use crate::system::settings::types::AppSettings;
+use crate::system::settings::types::RuntimeSettings;
 use shared::settings::SettingsFile;
 
 // Public ─────────────────────────────────────────────── //
@@ -9,10 +10,11 @@ use shared::settings::SettingsFile;
 /// Create the runtime settings for the application.
 /// Will not fail (returns default if any issues).
 pub fn new_runtime_settings(file: &SettingsFile) -> RuntimeSettings {
-    let file_settings = read_runtime_settings(file);
-
-    match file_settings {
-        Some(settings) => settings,
+    match read_runtime_settings(file) {
+        Some(settings) => match validate_encode_operation(&settings.encode_operation) {
+            Ok(_) => settings,
+            Err(_) => RuntimeSettings::new(default_encode_operation(), settings.window),
+        },
         None => default_settings(),
     }
 }

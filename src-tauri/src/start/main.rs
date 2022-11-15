@@ -1,5 +1,5 @@
-use crate::configure::create_configuration;
-use crate::configure::types::*;
+use crate::system::configure::create_configuration;
+use crate::system::configure::types::*;
 use crate::controller::cli::show_app_info;
 use crate::controller::cli::Arguments;
 use crate::start::tauri;

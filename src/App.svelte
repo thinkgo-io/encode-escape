@@ -7,6 +7,7 @@
 
   import { log, logError } from "./utils/log";
 
+  import { EncodeOperation } from "./types/encoding";
   import type { ListItem } from "./types/listItem";
 
   import { input, result } from "./store/content";
@@ -19,18 +20,23 @@
 
   import { encode } from "./backend/encode";
   import { setEncodingByName, swap } from "./domain/encode";
-  import { getEncodings } from "./backend/encode";
+  import { getCurrentEncodeOperation, getEncodings } from "./backend/encode";
   import { setEncodings } from "./domain/encode";
   import { onMount } from "svelte";
 
   onMount(async () => {
     setEncodings(await getEncodings());
+    let encodeOperation = await getCurrentEncodeOperation();
+    setEncodingByName(encodeOperation.encoding);
   });
 
   /* Functions  ─────────────────────────────────────────── */
 
   async function encodeIt() {
-    result.set(await encode($encoding, $operation, $input));
+    let encode_operation = new EncodeOperation($encoding, $operation);
+    result.set(
+      await encode(new EncodeOperation($encoding, $operation), $input)
+    );
   }
 
   function reportError(context: string, error: Error) {

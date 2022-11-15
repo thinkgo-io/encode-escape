@@ -1,4 +1,4 @@
-use crate::settings::types::*;
+use crate::system::settings::types::*;
 use shared::os::types::OSSettings;
 use shared::settings::SettingsFile;
 

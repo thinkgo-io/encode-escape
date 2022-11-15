@@ -1,7 +1,7 @@
 import { isUndefined, fireAndForget } from "./shared";
 import { log as send_log, logError as send_log_error } from "../backend/log";
 
-export const TO_BACKEND = false;
+export const TO_BACKEND = true;
 export const SKIP_BACKEND = true;
 
 // Public ─────────────────────────────────────────────── //
@@ -9,8 +9,8 @@ export const SKIP_BACKEND = true;
 export function log(message: string, toBackend = SKIP_BACKEND) {
 
 	console.log(message);
-	// if (toBackend)
-	// 	fireAndForget(() => send_log(message));
+	if (toBackend)
+	 	fireAndForget(() => send_log(message));
 }
 
 export function logError(context: string, error: Error) {

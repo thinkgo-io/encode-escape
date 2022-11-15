@@ -1,4 +1,4 @@
-use crate::settings::types::RuntimeSettings;
+use crate::system::settings::types::RuntimeSettings;
 use crate::utils::tauri::*;
 use shared::prelude::*;
 use shared::settings::SettingsFile;

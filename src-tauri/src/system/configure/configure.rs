@@ -1,10 +1,10 @@
 use shared::os::get_os_settings;
 use shared::prelude::*;
 
-use crate::configure::configure_app_settings::new_app_settings;
-use crate::configure::configure_runtime_settings::new_runtime_settings;
-use crate::configure::configure_runtime_settings::new_runtime_settings_file;
-use crate::configure::types::Configuration;
+use crate::system::configure::configure_app_settings::new_app_settings;
+use crate::system::configure::configure_runtime_settings::new_runtime_settings;
+use crate::system::configure::configure_runtime_settings::new_runtime_settings_file;
+use crate::system::configure::types::Configuration;
 
 pub fn create_configuration() -> Result<Configuration> {
     let os_settings = get_os_settings()?;

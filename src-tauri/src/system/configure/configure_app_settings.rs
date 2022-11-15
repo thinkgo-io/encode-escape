@@ -1,5 +1,5 @@
 use crate::data::app::*;
-use crate::settings::types::AppSettings;
+use crate::system::settings::types::AppSettings;
 use shared::os::types::OSSettings;
 
 pub fn new_app_settings(settings: &OSSettings) -> AppSettings {
