@@ -1,7 +1,6 @@
 use std::ops::Deref;
 use std::ops::DerefMut;
 use tauri::command;
-use tauri::Result;
 use tauri::State;
 use tauri::Window;
 
@@ -19,7 +18,6 @@ use crate::system::settings::types::WrappedRuntimeSettings;
 
 #[command]
 pub fn on_get_encodings() -> Vec<Encoding> {
-    log("Get Encodings");
     get_encodings()
 }
 
@@ -60,11 +58,6 @@ pub fn on_log(message: &str) {
 #[command]
 pub fn on_log_error(context: &str, message: &str) {
     log_error(context, message);
-}
-
-#[command]
-pub fn on_set_title(window: Window, title: String) -> Result<()> {
-    window.set_title(&title)
 }
 
 #[command]

@@ -45,15 +45,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "216261ddc8289130e551ddcd5ce8a064710c0d064a4d2895c67151c92b5443f6"
 
 [[package]]
-name = "app"
-version = "1.0.0"
-dependencies = [
- "float_eq",
- "serde",
- "shared",
-]
-
-[[package]]
 name = "atk"
 version = "0.15.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -675,13 +666,13 @@ dependencies = [
 name = "encode-escape"
 version = "0.0.1"
 dependencies = [
- "app",
  "clap",
  "colored",
  "encode",
  "serde",
  "serde_yaml",
  "shared",
+ "shared_app",
  "shellexpand",
  "tauri",
  "tauri-build",
@@ -2587,6 +2578,16 @@ dependencies = [
  "serde_yaml",
  "shellexpand",
  "thiserror",
+]
+
+[[package]]
+name = "shared_app"
+version = "1.0.0"
+dependencies = [
+ "float_eq",
+ "serde",
+ "shared",
+ "tauri",
 ]
 
 [[package]]

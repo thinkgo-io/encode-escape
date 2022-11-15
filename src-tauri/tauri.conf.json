@@ -17,7 +17,7 @@
     "bundle": {
       "active": true,
       "category": "DeveloperTool",
-      "copyright": "",
+      "copyright": "ThinkGo, LLC 2022",
       "deb": {
         "depends": []
       },
@@ -59,7 +59,7 @@
         "height": 600,
         "resizable": true,
         "title": "Encode Escape",
-        "visible": false,
+        "visible": true,
         "width": 800
       }
     ]

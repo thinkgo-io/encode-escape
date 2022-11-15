@@ -18,12 +18,12 @@ pub fn is_inside(window: &Window, display: &Display) -> bool {
         && window.y + window.height <= display.y + display.height
 }
 
-pub fn normalize_position(display: &Display, window: &Window, default: fn() -> Window) -> Window {
+pub fn normalize_position(display: &Display, window: &Window, default: &Window) -> Window {
     if is_inside(&window, &display) {
         return window.to_owned();
     } else if fits_inside(&window, &display) {
         return center(window, &display);
     } else {
-        return center(&default(), &display);
+        return center(default, &display);
     }
 }

@@ -11,8 +11,18 @@ import { log } from "../utils/log";
 export function setEncoding(value: Encoding) {
     encoding.set(value.name);
     operationList.set(toVariantList(value.operations));
-    operation.set(value.operations[0].name);
-    log("Set Encoding:\n  Encoding: " + get(encoding) + "\n  Variant: " + get(operation));
+    setOperation(value.operations[0]);
+    log("Set Encoding:\n\n    Encoding: " + get(encoding) + "\n    Defaulting Variant to: " + get(operation));
+}
+
+export function setEncodingAndOperationByName(encodingName: string, operationName: string) {
+    const encoding = getEncodingFromItems(get(encodings), encodingName);
+    const operation = getVariant(encoding.operations, operationName);
+    // const encoding = get(encodings).find((encoding) => encoding.name === encodingName);
+    // const operation = encoding.operations.find((operation) => operation.name === operationName);
+    setEncoding(encoding);
+    setOperation(operation);
+    log("Set Encoding:\n\n    Encoding: " + encoding.name + "\n    Variant: " + operation.name);
 }
 
 export function setEncodingByName(name: string) {
@@ -23,8 +33,11 @@ export function setEncodingByName(name: string) {
 export function setEncodings(values:Encoding[]) {
     encodings.set(values);
     setEncoding(values[0])
-
     encodingList.set(toEncodingList(get(encodings)));
+}
+
+export function setOperation(value: Operation) {
+    operation.set(value.name);
 }
 
 export function swap() {

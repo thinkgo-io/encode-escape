@@ -1,6 +1,6 @@
-use app::types::Window;
 use encode::types::EncodeOperation;
 use serde::{Deserialize, Serialize};
+use shared_app::types::Window;
 
 /// Created with CodeCrank
 ///
@@ -31,11 +31,6 @@ impl RuntimeSettings {
 
     pub fn encode_operation(&mut self, encode_operation: EncodeOperation) -> &mut Self {
         self.encode_operation = encode_operation;
-        self
-    }
-
-    pub fn window(mut self, window: Window) -> Self {
-        self.window = window;
         self
     }
 }

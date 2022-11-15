@@ -1,14 +1,12 @@
 <script lang="ts">
   // Events ─────────────────────────────────────────────── //
 
-  // "select" - When an item is selected from the dropdown.
+  // "select" - Fires when an item is selected from the radio bar.
 
   // Imports ────────────────────────────────────────────── //
 
-  import { createEventDispatcher } from "svelte";
-  import { beforeUpdate, afterUpdate, onMount } from "svelte";
   import type { ListItem } from "../types/listItem";
-  import { log } from "../utils/log";
+  import { createEventDispatcher } from "svelte";
 
   /* Parameters ─────────────────────────────────────────── */
 
@@ -22,16 +20,6 @@
   const groupId = "radio-bar-" + name;
 
   $: selectedBind = { items, selected };
-
-  /* Functions ──────────────────────────────────────────── */
-
-  function getChecked(item: ListItem): string {
-    return isSelected(item) ? "checked" : "";
-  }
-
-  function isSelected(item: ListItem): boolean {
-    return item.id === selected;
-  }
 
   /* Action Handlers ─────────────────────────────────────── */
 

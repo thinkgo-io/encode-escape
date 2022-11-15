@@ -20,8 +20,8 @@ shellexpand = "2.1.2"
 tauri = { version = "1.2", features = ["api-all"] }
 
 shared = { path = "lib-shared" }
+shared_app = { path = "lib-shared-app" }
 encode = { path = "lib-encode" }
-app = { path = "lib-app" }
 
 [features]
 # by default Tauri runs in production mode

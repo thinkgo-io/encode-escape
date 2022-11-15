@@ -1,8 +1,8 @@
 use crate::system::settings::types::RuntimeSettings;
-use crate::utils::tauri::*;
 use shared::prelude::*;
 use shared::settings::SettingsFile;
-use tauri::Window;
+use shared_app::utils::tauri::*;
+use tauri::Window as TauriWindow;
 
 // Public ─────────────────────────────────────────────── //
 
@@ -26,17 +26,8 @@ pub fn read_runtime_settings(file: &SettingsFile) -> Option<RuntimeSettings> {
     }
 }
 
-pub fn update_runtime_settings_window(window: &Window, settings: &mut RuntimeSettings) {
-    if window.is_fullscreen().unwrap_or(false) {
-        return;
-    }
-
-    if window.is_maximized().unwrap_or(false) {
-        settings.window.maximized = true;
-        return;
-    }
-
-    update_window_settings(window, &mut settings.window)
+pub fn update_runtime_settings_window(window: &TauriWindow, settings: &mut RuntimeSettings) {
+    update_settings_window(window, &mut settings.window)
 }
 
 pub fn write_runtime_settings(settings: &RuntimeSettings, file: &SettingsFile) {
@@ -58,18 +49,4 @@ fn log_error(message: &str, error: Error) {
 fn log_and_return(message: &str, error: Error) -> Option<RuntimeSettings> {
     log_error(message, error);
     None
-}
-
-fn update_window_settings(window: &Window, setting: &mut app::types::Window) {
-    setting.maximized = false;
-
-    if let Ok(position) = window_to_logical_position(window) {
-        setting.x = position.x;
-        setting.y = position.y;
-    }
-
-    if let Ok(size) = window_to_logical_size(window) {
-        setting.width = size.width;
-        setting.height = size.height;
-    }
 }

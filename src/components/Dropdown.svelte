@@ -1,8 +1,15 @@
 <script lang="ts">
+  // Events ─────────────────────────────────────────────── //
+
+  // "select" - Fires when an item is selected from the dropdown.
+
+  // Imports ────────────────────────────────────────────── //
+
   import type { ListItem } from "../types/listItem";
   import { createEventDispatcher } from "svelte";
 
   /* Parameters ─────────────────────────────────────────── */
+
   export let items: ListItem[];
   export let selected: string;
   export let unselectedLabel: string;
@@ -11,32 +18,33 @@
 
   const dispatch = createEventDispatcher();
 
-  $: label = getLabel();
-  $: tooltip = getTooltip();
+  $: selectedBind = { items, selected };
+  $: label = getLabel(selected);
+  $: tooltip = getTooltip(selected);
 
   // Functions ──────────────────────────────────────────── //
 
-  function isSelected(item: ListItem): boolean {
+  function isSelected(item: ListItem, selected): boolean {
     return item.id === selected;
   }
 
-  function getLabel(): string {
-    return getSelected()?.label || unselectedLabel;
+  function getLabel(selected: string): string {
+    return getSelected(selected)?.label || unselectedLabel;
   }
 
-  function getSelected(): ListItem | null {
-    for (const item of items) if (isSelected(item)) return item;
+  function getSelected(selected: string): ListItem | null {
+    for (const item of items) if (isSelected(item, selected)) return item;
     return null;
   }
 
-  function getTooltip(): string {
-    return getSelected()?.tooltip || "";
+  function getTooltip(selected: string): string {
+    return getSelected(selected)?.tooltip || "";
   }
 
   /* Action Handlers ─────────────────────────────────────── */
 
   const onSelect = (item: ListItem) => {
-    label = item.label;
+    // label = item.label;
     dispatch("select", { id: item.id });
   };
 </script>
@@ -70,6 +78,7 @@
         class="toolbar-item"
         on:click={() => onSelect(item)}
         on:keydown={() => onSelect(item)}
+        selected={item.id === selected || null}
       >
         {#if item.tooltip}
           <a

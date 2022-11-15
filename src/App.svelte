@@ -19,7 +19,11 @@
   } from "./store/encoding";
 
   import { encode } from "./backend/encode";
-  import { setEncodingByName, swap } from "./domain/encode";
+  import {
+    setEncodingAndOperationByName,
+    setEncodingByName,
+    swap,
+  } from "./domain/encode";
   import { getCurrentEncodeOperation, getEncodings } from "./backend/encode";
   import { setEncodings } from "./domain/encode";
   import { onMount } from "svelte";
@@ -27,7 +31,10 @@
   onMount(async () => {
     setEncodings(await getEncodings());
     let encodeOperation = await getCurrentEncodeOperation();
-    setEncodingByName(encodeOperation.encoding);
+    setEncodingAndOperationByName(
+      encodeOperation.encoding,
+      encodeOperation.operation
+    );
   });
 
   /* Functions  ─────────────────────────────────────────── */
@@ -98,7 +105,7 @@
 <div class="toolbar">
   <Dropdown
     items={$encodingList}
-    selected={$encoding}
+    bind:selected={$encoding}
     unselectedLabel="Set Encoding"
     on:select={(event) => onSelectEncoding(event)}
   />

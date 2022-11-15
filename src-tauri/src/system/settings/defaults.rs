@@ -1,6 +1,6 @@
 use crate::system::settings::types::RuntimeSettings;
-use app::types::Window;
 use encode::types::EncodeOperation;
+use shared_app::types::Window;
 use tauri::LogicalSize;
 use tauri::Size;
 
