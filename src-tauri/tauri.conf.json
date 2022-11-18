@@ -59,7 +59,7 @@
         "height": 600,
         "resizable": true,
         "title": "Encode Escape",
-        "visible": true,
+        "visible": false,
         "width": 800
       }
     ]

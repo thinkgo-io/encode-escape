@@ -1,2 +1,2 @@
-pub mod main;
+pub mod cli;
 pub mod tauri;
