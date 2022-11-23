@@ -23,3 +23,6 @@ dist-ssr
 *.sln
 *.sw?
 src-tauri/target
+src-tauri/lib-app/target
+src-tauri/lib-encode/target
+src-tauri/lib-shared/target
