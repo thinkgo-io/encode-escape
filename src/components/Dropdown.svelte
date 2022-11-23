@@ -52,7 +52,7 @@
 <div class="dropdown item">
   {#if tooltip}
     <button
-      class="btn btn-secondary dropdown-toggle toolbar-item"
+      class="btn theme dropdown-toggle toolbar-item"
       type="button"
       data-bs-toggle="dropdown"
       data-toggle="dropdown"
@@ -64,7 +64,7 @@
     </button>
   {:else}
     <button
-      class="btn btn-secondary dropdown-toggle toolbar-item"
+      class="btn theme dropdown-toggle toolbar-item"
       type="button"
       data-bs-toggle="dropdown"
       aria-expanded="false"

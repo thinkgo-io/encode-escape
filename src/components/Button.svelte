@@ -5,7 +5,7 @@
 {#if tooltip}
   <button
     type="button"
-    class="btn btn-secondary toolbar-item item"
+    class="btn theme toolbar-item item"
     data-toggle="tooltip"
     data-placement="bottom"
     title={tooltip}
@@ -14,7 +14,7 @@
     <slot />
   </button>
 {:else}
-  <button type="button" class="btn btn-secondary toolbar-item item" on:click>
+  <button type="button" class="btn theme toolbar-item item" on:click>
     <slot />
   </button>
 {/if}

@@ -97,39 +97,6 @@ textarea {
   vertical-align: 0.2em;
 }
 
-/* Colors ─────────────────────────────────────────────── */
-
-:root {
-  --light-background: #F0F0F0;
-  --dark-background: #16161A;
-}
-
-
-/* Light Scheme ───────────────────── */
-
-.light {
-  background-color: var(--light-background);
-}
-
-body {
-  background-color: var(--light-background);
-}
-
-
-/* Dark Scheme ────────────────────── */
-
-.dark {
-  background-color: var(--dark-background);
-}
-
-@media (prefers-color-scheme: dark) {
-
-  #nope>body {
-    background-color: var(--dark-background);
-  }
-}
-
-
 /* Text ───────────────────────────────────────────────── */
 
 .code {
@@ -137,4 +104,200 @@ body {
   font-size: 0.9em;
   tab-size: 4;
   -moz-tab-size: 4
+}
+
+/* Color Schemes ──────────────────────────────────────────── */
+
+/* Dark Scheme (Default) ──────────────────────────────────── */
+
+:root {
+
+  /* All ────────────────────────────────────────────────── */
+
+  --foreground: White;
+  --background: #262626;
+
+
+  /* Controls ───────────────────────────────────────────── */
+
+  --control-foreground: #D0D0D0;
+  --control-background: #404040;
+  --control-border: #404040;
+  --control-shadow: rgb(72, 72, 72);
+
+  --control-hover-background: #595959;
+  --control-active-background: #808080;
+  --control-focus-border: #404040;
+
+  --focus-shadow: 90, 90, 90;
+
+
+  /* Controls - Outline ─────────────────────────────────── */
+
+  --outline-control-foreground: #D0D0D0;
+  --outline-control-background: transparent;
+
+  --outline-control-foreground-action: #D0D0D0;
+  --outline-control-hover-background: #333333;
+  --outline-control-active-background: #606060;
+  --outline-control-focus-border: #666666;
+
+
+  /* Data Entry ─────────────────────────────────────────── */
+
+  --entry-foreground: #F0F0F0;
+  --entry-background: #2E2E2E;
+
+  --entry-border: 1px solid #404040;
+  --entry-placeholder-foreground: #6c757d;
+  --entry-focus-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Light Scheme ───────────────────────────────────────────── */
+
+@media (prefers-color-scheme: light) {
+
+  :root {
+
+    /* All ────────────────────────────────────────────────── */
+
+    --foreground: #101010;
+    --background: #F0F0F0;
+
+
+    /* Controls ───────────────────────────────────────────── */
+
+    --control-foreground: #303030;
+    --control-background: white;
+    --control-border: #C3C3C3;
+    --control-shadow: rgb(37, 42, 49);
+
+    --control-hover-background: #F0F0F0;
+    --control-active-background: #D0D0D0;
+    --control-focus-border: #A0A0A0;
+
+    --focus-shadow: 160, 160, 160;
+
+
+    /* Controls - Outline ─────────────────────────────────── */
+
+    --outline-control-foreground: #808080;
+    --outline-control-background: transparent;
+
+    --outline-control-foreground-action: #white;
+    --outline-control-hover-background: #E0E0E0;
+    --outline-control-active-background: #A0A0A0;
+    --outline-control-focus-border: #C3C3C3;
+
+
+    /* Data Entry ─────────────────────────────────────────── */
+
+    --entry-foreground: black;
+    --entry-background: white;
+
+    --entry-border: 1px solid #C3C3C3;
+    --entry-placeholder-foreground: #A0A0A0;
+    --entry-focus-shadow: 0 0 0 0.25rem rgba(112, 162, 219, 0.5);
+  }
+}
+
+body {
+  color: var(--foreground);
+  background-color: var(--background);
+}
+
+.theme {
+
+  /* All ────────────────────────────────────────────────── */
+
+  transition: none;
+
+  /* Controls ───────────────────────────────────────────── */
+
+  --bs-btn-color: var(--control-foreground);
+  --bs-btn-bg: var(--control-background);
+  --bs-btn-border-color: var(--control-border);
+
+  --bs-btn-hover-color: var(--control-foreground);
+  --bs-btn-hover-bg: var(--control-hover-background);
+  --bs-btn-hover-border-color: var(--control-focus-border);
+
+  --bs-btn-focus-shadow-rgb: var(--focus-shadow);
+
+  --bs-btn-active-color: var(--control-foreground);
+  --bs-btn-active-bg: var(--control-active-background);
+  --bs-btn-active-border-color: var(--control-border);
+  --bs-btn-active-shadow: inset 0 3px 5px var(--control-shadow);
+
+  --bs-btn-disabled-color: none;
+  --bs-btn-disabled-bg: none;
+  --bs-btn-disabled-border-color: none;
+}
+
+.theme-outline {
+
+  --bs-btn-color: var(--outline-control-foreground);
+  --bs-btn-bg: var(--outline-control-background);
+  --bs-btn-border-color: var(--control-border);
+
+  --bs-btn-hover-color: var(--outline-control-foreground-action);
+  --bs-btn-hover-bg: var(--outline-control-hover-background);
+  --bs-btn-hover-border-color: var(--control-focus-border);
+
+  --bs-btn-focus-shadow-rgb: var(--focus-shadow);
+
+  --bs-btn-active-color: var(--control-foreground-action);
+  --bs-btn-active-bg: var(--control-active-background);
+  --bs-btn-active-border-color: var(--control-border);
+  --bs-btn-active-shadow: inset 0 3px 5px var(--control-shadow);
+
+  --bs-btn-disabled-color: none;
+  --bs-btn-disabled-bg: none;
+  --bs-btn-disabled-border-color: none;
+
+  transition: none;
+}
+
+.btn-check+.colors-outline:hover {
+  --bs-btn-color: var(--outline-control-foreground);
+  --bs-btn-bg: var(--outline-control-hover-background);
+  --bs-btn-border-color: var(--control-border);
+}
+
+.btn-check+.colors-outline:focus {
+  color: var(--control-active-background);
+  background: var(--outline-control-hover-background);
+  --bs-btn-border-color: var(--outline-control-focus-border);
+}
+
+.btn-check+.colors-outline:active {
+  --bs-btn-color: var(--control-foreground);
+  --bs-btn-bg: var(--outline-control-active-background);
+  --bs-btn-border-color: var(--control-border);
+}
+
+.btn-check:checked+.btn {
+  --bs-btn-active-color: var(--control-foreground);
+  --bs-btn-active-bg: var(--control-background);
+  --bs-btn-active-border-color: var(--control-border);
+}
+
+
+/* All Schemes ────────────────────────────────────────── */
+
+textarea.theme {
+  color: var(--entry-foreground);
+  background: var(--entry-background);
+  border: var(--entry-border);
+}
+
+textarea.theme:focus {
+  color: var(--entry-foreground);
+  background: var(--entry-background);
+  border: var(--entry-border);
+  box-shadow: var(--entry-focus-shadow);
+}
+
+textarea.theme::placeholder {
+  color: var(--entry-placeholder-foreground);
 }

@@ -45,7 +45,7 @@
     />
     {#if item.tooltip}
       <label
-        class="btn btn-outline-secondary toolbar-item"
+        class="btn theme-outline toolbar-item"
         for="{name}-{item.id}"
         data-toggle="tooltip"
         data-placement="bottom"
@@ -55,7 +55,7 @@
       >
     {:else}
       <label
-        class="btn btn-outline-secondary toolbar-item"
+        class="btn theme-outline toolbar-item"
         for="{name}-{item.id}"
         on:click={() => onSelect(item)}
         on:keydown={() => onSelect(item)}>{item.label}</label

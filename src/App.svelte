@@ -131,14 +131,14 @@
 <div class="content">
   <textarea
     id="input"
-    class="item form-control code"
+    class="item form-control code theme"
     placeholder="Input here"
     bind:value={$input}
     on:input={() => onEncode()}
   />
   <textarea
     id="result"
-    class="item form-control code"
+    class="item form-control code theme"
     placeholder="Results here"
     bind:value={$result}
   />
