@@ -67,6 +67,6 @@
 <style>
   label {
     transition: none;
-    min-width: 6em;
+    min-width: 6rem;
   }
 </style>

@@ -39,6 +39,11 @@
 
   /* Functions  ─────────────────────────────────────────── */
 
+  function clear() {
+    input.set("");
+    result.set("");
+  }
+
   async function encodeIt() {
     let encode_operation = new EncodeOperation($encoding, $operation);
     result.set(
@@ -52,6 +57,12 @@
   }
 
   /* Event Handlers ─────────────────────────────────────── */
+
+  function onClear(event) {
+    if (event.key !== "Escape") return;
+    event.preventDefault();
+    clear();
+  }
 
   async function onCopy() {
     try {
@@ -135,11 +146,13 @@
     placeholder="Input here"
     bind:value={$input}
     on:input={() => onEncode()}
+    on:keypress={(event) => onClear(event)}
   />
   <textarea
     id="result"
     class="item form-control code theme"
     placeholder="Results here"
     bind:value={$result}
+    on:keypress={(event) => onClear(event)}
   />
 </div>

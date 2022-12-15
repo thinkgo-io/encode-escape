@@ -9,6 +9,20 @@ pub fn check(valid: bool, details: &str) -> Option<Invalid> {
     None
 }
 
+pub fn check_contains_only(value: &str, chars: &str) -> Option<Invalid> {
+    let mut position = 1;
+    for character in value.chars() {
+        if !chars.contains(character) {
+            return Some(Invalid::new(&format!(
+                "Invalid character '{}' at position {}.",
+                character, position
+            )));
+        }
+        position += 1;
+    }
+    None
+}
+
 pub fn check_not_blank(value: &str) -> Option<Invalid> {
     check(value.trim().is_empty(), "The value must not be blank.")
 }

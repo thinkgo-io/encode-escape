@@ -1,8 +1,8 @@
 use colored::*;
 
-pub fn log(message: &str) {
-    println!("{}", message);
-    println!();
+pub fn log(_message: &str) {
+    // println!("{}", message);
+    // println!();
 }
 
 pub fn log_lines(lines: Vec<&str>) {

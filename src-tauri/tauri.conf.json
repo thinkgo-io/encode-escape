@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "Encode Escape",
-    "version": "0.0.1"
+    "version": "1.0.0"
   },
   "tauri": {
     "allowlist": {
@@ -38,8 +38,9 @@
         "providerShortName": null,
         "signingIdentity": null
       },
+      "publisher": "ThinkGo, LLC",
       "resources": [],
-      "shortDescription": "",
+      "shortDescription": "Encode and escape different formats.",
       "targets": "all",
       "windows": {
         "certificateThumbprint": null,

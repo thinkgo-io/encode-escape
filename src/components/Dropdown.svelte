@@ -49,7 +49,7 @@
   };
 </script>
 
-<div class="dropdown item">
+<div class="dropdown toolbar-item item">
   {#if tooltip}
     <button
       class="btn theme dropdown-toggle toolbar-item"
@@ -72,7 +72,7 @@
       {label}
     </button>
   {/if}
-  <ul class="dropdown-menu dropdown-menu-dark toolbar-item">
+  <ul class="dropdown-menu toolbar-item theme">
     {#each items as item}
       <li
         class="toolbar-item"
@@ -101,14 +101,13 @@
 
 <style>
   button {
-    min-width: 8em;
-  }
-  ul,
-  li {
-    font-size: 1.1em;
+    min-width: 8rem;
   }
   .dropdown-toggle:after {
-    margin-left: 0.5em;
-    vertical-align: 0.21em;
+    margin-left: 0.5rem;
+    vertical-align: 0.21rem;
+  }
+  .item {
+    display:inline-flex;
   }
 </style>

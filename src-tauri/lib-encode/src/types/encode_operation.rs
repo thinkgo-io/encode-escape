@@ -1,19 +1,19 @@
 use serde::{Deserialize, Serialize};
 
-/// Created with CodeCrank
-///
-/// ── Crank Def ───────────────
-///
-/// EncodeOperation
-///
-/// Options: serialize
-///
-/// Properties:
-///
-/// 	encoding	String		@ pub
-/// 	operation	String		@ pub
-///
-/// ── End Def ─────────────────
+// Created with CodeCrank
+//
+// ── Crank Def ───────────────
+//
+// EncodeOperation
+//
+// Options: serialize
+//
+// Properties:
+//
+// 	encoding	String		@ pub
+// 	operation	String		@ pub
+//
+// ── End Def ─────────────────
 
 #[derive(Debug, PartialEq, Clone, Serialize, Deserialize)]
 
