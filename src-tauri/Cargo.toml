@@ -1,9 +1,9 @@
 [package]
 name = "encode-escape"
-version = "1.0.0"
+version = "1.0.3"
 description = "A developer tool to quickly encode or escape values."
 authors = ["ThinkGo, LLC"]
-license = "Copyright ThinkGo, LLC 2022"
+license = "Copyright © 2023 ThinkGo LLC"
 repository = ""
 edition = "2021"
 rust-version = "1.57"

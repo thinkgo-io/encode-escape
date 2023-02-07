@@ -34,8 +34,8 @@ pub fn get_encodings() -> Vec<Encoding> {
         ),
         Encoding::new(
             TEXT_CHARACTER,
-            "Text Character",
-            "Converts text to and from hex or decimal characters codes.",
+            "Text Unicode",
+            "Converts text to and from Unicode characters (hex or decimal).",
             vec![
                 Operation::new(TO_HEX, FROM_HEX, "To Hex", "Convert text to hexadecimal"),
                 Operation::new(FROM_HEX, TO_HEX, "From Hex", "Convert hexadecimal to text"),
@@ -46,7 +46,7 @@ pub fn get_encodings() -> Vec<Encoding> {
         Encoding::new(
             TEXT_UTF8,
             "Text UTF-8",
-            "Converts text to and from UTF-8 hex or decimal bytes.",
+            "Converts text to and from UTF-8 byte values (hex or decimal).",
             vec![
                 Operation::new(TO_HEX, FROM_HEX, "To Hex", "Convert UTF-8 to hexadecimal"),
                 Operation::new(FROM_HEX, TO_HEX, "From Hex", "Convert hexadecimal to UTF-8"),

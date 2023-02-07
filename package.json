@@ -1,7 +1,7 @@
 {
   "name": "encode-escape",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.3",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -15,7 +15,7 @@
   },
   "devDependencies": {
     "@sveltejs/vite-plugin-svelte": "^1.0.1",
-    "@tauri-apps/cli": "^1.2.1",
+    "@tauri-apps/cli": "^1.2.3",
     "@tsconfig/svelte": "^3.0.0",
     "@types/node": "^18.7.10",
     "svelte": "^3.49.0",

@@ -8,7 +8,7 @@
   },
   "package": {
     "productName": "Encode Escape",
-    "version": "1.0.0"
+    "version": "1.0.3"
   },
   "tauri": {
     "allowlist": {
@@ -17,7 +17,7 @@
     "bundle": {
       "active": true,
       "category": "DeveloperTool",
-      "copyright": "ThinkGo, LLC 2022",
+      "copyright": "Copyright © 2023 ThinkGo LLC",
       "deb": {
         "depends": []
       },
@@ -32,7 +32,7 @@
       "identifier": "io.thinkgo.encode-escape",
       "longDescription": "",
       "macOS": {
-        "entitlements": null,
+        "entitlements": "../entitlements.plist",
         "exceptionDomain": "",
         "frameworks": [],
         "providerShortName": null,

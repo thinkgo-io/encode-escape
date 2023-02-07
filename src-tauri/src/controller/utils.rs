@@ -20,10 +20,16 @@ pub fn set_window_title(window: &Window, settings: &RuntimeSettings) {
 
 pub fn to_title(settings: &RuntimeSettings) -> String {
     match to_encode_operation_titles(&settings.encode_operation) {
-        Some(encode_operation) => format!(
+        Some(encode_operation) => {
+            if encode_operation.operation.to_lowercase().starts_with("to") {
+                return format!(
+                    "{} {} - {}",
+                    encode_operation.encoding, encode_operation.operation, APP_NAME);
+            }
+            return format!(
             "{} {} - {}",
             encode_operation.operation, encode_operation.encoding, APP_NAME
-        ),
+        )},
         None => APP_NAME.to_string(),
     }
 }
