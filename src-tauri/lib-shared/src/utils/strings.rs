@@ -13,6 +13,10 @@ pub fn is_blank(value: &str) -> bool {
     value.trim().is_empty()
 }
 
+pub fn remove_newlines(value: &str) -> String {
+    value.replace("\r", "").replace("\n", "")
+}
+
 pub fn split_every(value: &str, length: usize) -> Vec<&str> {
     let mut result = Vec::new();
     let mut index = 0;

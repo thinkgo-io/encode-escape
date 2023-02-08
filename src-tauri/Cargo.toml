@@ -1,6 +1,6 @@
 [package]
 name = "encode-escape"
-version = "1.0.3"
+version = "1.0.5"
 description = "A developer tool to quickly encode or escape values."
 authors = ["ThinkGo, LLC"]
 license = "Copyright © 2023 ThinkGo LLC"

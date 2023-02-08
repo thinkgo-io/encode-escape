@@ -35,6 +35,22 @@
       encodeOperation.encoding,
       encodeOperation.operation
     );
+
+    // Copy Results to Clipboard
+    document.addEventListener("keydown", (event) => {
+      if (event.metaKey && event.key === "r") {
+        event.preventDefault();
+        onCopy();
+      }
+    });
+
+    // Swap Input and Results
+    document.addEventListener("keydown", (event) => {
+      if (event.metaKey && event.key === "s") {
+        event.preventDefault();
+        onSwap();
+      }
+    });
   });
 
   /* Functions  ─────────────────────────────────────────── */

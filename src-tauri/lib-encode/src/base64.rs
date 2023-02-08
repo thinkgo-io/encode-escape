@@ -1,14 +1,33 @@
 use base64::DecodeError;
 use shared::prelude::*;
+use shared::utils::strings::remove_newlines;
 use shared::utils::strings::to_utf8;
+use shared::utils::First;
 
 pub fn decode(value: &str) -> Result<String> {
-    let decoded = base64::decode(value).map_err(to_invalid_value)?;
-    Ok(to_utf8(&decoded)?)
+    let decoded = base64::decode(remove_newlines(value)).map_err(to_invalid_value)?;
+    let utf8 = to_utf8(&decoded);
+    if utf8.is_ok() {
+        utf8
+    } else {
+        Ok(to_hex(&decoded))
+    }
 }
 
 pub fn encode(value: &str) -> String {
     base64::encode(value)
+}
+
+pub fn to_hex(values: &Vec<u8>) -> String {
+    let mut result = String::new();
+    let mut first = First::new();
+    for item in values {
+        if first.not_first() {
+            result.push_str(" ");
+        }
+        result.push_str(&format!("{:02X}", item))
+    }
+    result
 }
 
 fn to_invalid_value(error: DecodeError) -> Error {
