@@ -11,7 +11,9 @@ This quick and easy tool handles every day conversions for developers so you spe
 
 This app was written primarily as a proof of concept to see if a Rust / Tauri app could be uploaded to the Apple and Windows app stores. The answer after a lot of pain is yes to the Apple app store. The Windows store is TBD.
 
-Also, it wasn't obvious at the time that there was a simple app that handled encoding / decoding tasks for developers. There are quite a few out there but this has its place.
+This was also written to test if a reasonably professional app could be created easily enough in Tauri. The answer to that is a resounding yes.
+
+But why this app? It wasn't obvious at the time that there was a simple app that handled encoding / decoding tasks for developers. There are others out there but this tool has its place.
 
 
 ## Links
