@@ -10,7 +10,9 @@ pub const ENCODE: &str = "encode";
 pub const DECODE: &str = "decode";
 
 pub const ESCAPE: &str = "escape";
+pub const ESCAPE_QUOTES: &str = "escape-quotes";
 pub const UNESCAPE: &str = "unescape";
+pub const UNESCAPE_QUOTES: &str = "unescape-quotes";
 
 pub const FROM_HEX: &str = "from-hex";
 pub const FROM_DECIMAL: &str = "from-decimal";

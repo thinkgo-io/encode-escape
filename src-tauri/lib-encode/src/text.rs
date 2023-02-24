@@ -36,6 +36,24 @@ pub fn escape(value: &str) -> String {
     result
 }
 
+pub fn escape_quotes(value: &str) -> String {
+    let mut result = String::new();
+    for character in value.chars() {
+        match character {
+            '\"' => {
+                result.push('\\');
+                result.push('\"');
+            }
+            '\'' => {
+                result.push('\\');
+                result.push('\'');
+            }
+            value => result.push(value),
+        }
+    }
+    result
+}
+
 pub fn unescape(value: &str) -> String {
     let mut result = String::new();
     let mut escape = false;
@@ -49,6 +67,28 @@ pub fn unescape(value: &str) -> String {
                 'n' => result.push('\n'),
                 'r' => result.push('\r'),
                 't' => result.push('\t'),
+                value => result.push(value),
+            }
+            escape = false;
+        } else {
+            if character == '\\' {
+                escape = true;
+            } else {
+                result.push(character);
+            }
+        }
+    }
+    result
+}
+
+pub fn unescape_quotes(value: &str) -> String {
+    let mut result = String::new();
+    let mut escape = false;
+    for character in value.chars() {
+        if escape {
+            match character {
+                '\"' => result.push('\"'),
+                '\'' => result.push('\''),
                 value => result.push(value),
             }
             escape = false;

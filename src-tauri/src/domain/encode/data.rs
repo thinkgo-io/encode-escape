@@ -20,7 +20,7 @@ pub fn get_encodings() -> Vec<Encoding> {
             "Converts to and from escaped HTML.",
             vec![
                 Operation::new(ESCAPE, UNESCAPE, "Escape", "Escapes text to HTML"),
-                Operation::new(UNESCAPE, ESCAPE, "Unescape", "Convert escaped HTML to text"),
+                Operation::new(UNESCAPE, ESCAPE, "Unescape", "Convert escaped HTML to back text"),
             ],
         ),
         Encoding::new(
@@ -29,7 +29,9 @@ pub fn get_encodings() -> Vec<Encoding> {
             "Converts to and from escaped text.",
             vec![
                 Operation::new(ESCAPE, UNESCAPE, "Escape", "Escapes text special characters."),
-                Operation::new(UNESCAPE, ESCAPE, "Unescape", "Converts escaped text to text."),
+                Operation::new(UNESCAPE, ESCAPE, "Unescape", "Converts escaped text back to text."),
+                Operation::new(ESCAPE_QUOTES, UNESCAPE_QUOTES, "Escape Quotes", "Escapes quotes only in text."),
+                Operation::new(UNESCAPE_QUOTES, ESCAPE_QUOTES, "Unescape Quotes", "Convert escaped quotes back to text."),
             ],
         ),
         Encoding::new(

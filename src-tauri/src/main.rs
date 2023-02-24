@@ -30,13 +30,14 @@ fn main() -> ResultOk {
 
     start_cli(&arguments)?;
     start_tauri(&configuration)?;
-    
+
     Ok(())
 }
 
 pub fn start_tauri(configuration: &ArcedConfiguration) -> StandardBoxedResultOk {
     let configuration_1 = configuration.clone();
     let configuration_2 = configuration.clone();
+
     Builder::default()
         .setup(|app| start::tauri::setup_tauri(app, configuration_1))
         .invoke_handler(tauri::generate_handler![

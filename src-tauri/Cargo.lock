@@ -664,7 +664,7 @@ dependencies = [
 
 [[package]]
 name = "encode-escape"
-version = "1.0.11"
+version = "1.0.12"
 dependencies = [
  "clap",
  "colored",

@@ -67,6 +67,8 @@ fn encode_text(operation: &str, input: &str) -> Result<String> {
     match operation {
         ESCAPE => Ok(text::escape(input)),
         UNESCAPE => Ok(text::unescape(input)),
+        ESCAPE_QUOTES => Ok(text::escape_quotes(input)),
+        UNESCAPE_QUOTES => Ok(text::unescape_quotes(input)),
         _ => to_invalid_operation(operation),
     }
 }
