@@ -4,7 +4,7 @@
 
 ## What Is Encode Escape
 
-This quick and easy tool handles every day conversions for developers so you spend more time programming.
+This quick and easy tool handles every day encoding conversions for developers so you spend more time programming.
 
 
 ## Why Encode Escape
@@ -13,7 +13,7 @@ This app was written primarily as a proof of concept to see if a Rust / Tauri ap
 
 This was also written to test if a reasonably professional app could be created easily enough in Tauri. The answer to that is a resounding yes.
 
-But why this app? It wasn't obvious at the time that there was a simple app that handled encoding / decoding tasks for developers. There are others out there but this tool has its place.
+But why this app? It wasn't obvious at the time that there was a simple app that handled encoding / decoding tasks for developers. There are others out there but this tool has its place. The unicode operations in particular are very enlightening.
 
 
 ## Links
@@ -36,4 +36,4 @@ The app is primarily written in Rust with a web UI handled by Tauri. The front e
 
 This software is covered by the GNU General Public License Version 3.
 
-[License Text](LICENSE)
+[Official License](LICENSE)
